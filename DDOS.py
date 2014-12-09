@@ -36,7 +36,7 @@ class DDOS(Thread):
         while True:  # 以非常慢的速度发送数据
             sock.send('z')
             time.sleep(120)
-        print sock.recv(1024)
+        print(sock.recv(1024))
         sock.close()
 
 
