@@ -86,9 +86,6 @@ def handler(data):
 # except:
 # return ()
 
-
-
-
 if 1:
 
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
