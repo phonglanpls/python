@@ -39,7 +39,6 @@ def handler(data):
     resp = urllib2.urlopen(req, None, 2)
     html = resp.read()
 
-    # print html
     return html
 
 
