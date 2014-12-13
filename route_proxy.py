@@ -2,7 +2,10 @@
 import socket, select
 import sys
 import thread
-from multiprocessing import Process
+
+# reload(sys)
+# sys.setdefaultencoding('utf-8')
+# from multiprocessing import Process
 
 
 class Proxy:
@@ -10,7 +13,7 @@ class Proxy:
         self.client, _ = soc.accept()
         self.target = None
         self.request_url = None
-        self.BUFSIZE = 4096
+        self.BUFSIZE = 9600
         self.method = None
         self.targetHost = None
 
@@ -41,7 +44,7 @@ class Proxy:
         self.target.send(request)
         self.nonblocking()
 
-    def connectMethod(self, request):  #对于CONNECT处理可以添加在这里
+    def connectMethod(self, request):  # 对于CONNECT处理可以添加在这里
         pass
 
     def run(self):
@@ -87,11 +90,13 @@ if __name__ == '__main__':
     host = '127.0.0.1'
     port = 8083
     backlog = 5
+
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     server.bind((host, port))
     server.listen(5)
+    i = 0
     while True:
         thread.start_new_thread(Proxy(server).run, ())
-        # p=Process(target=Proxy(server).run, args=()) #多进程
-        # p.start()
+        i += 1
+        print i
